@@ -24,4 +24,4 @@
     dest: "{{ urlwatch_config_path }}/{{ item }}"
     mode: 0640
   with_items:
-    - urls.yaml
+    - url.yaml
