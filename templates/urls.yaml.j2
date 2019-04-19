@@ -1,4 +1,6 @@
 ---
 {% for item in urlwatch_urls %}
+{{- '# ' + item.dscr if item.dscr is defined else '' }}
 url: "{{ item.url }}"
+{{ 'filter: "' + item.filter + '"' if item.filter is defined else '' }}
 {% endfor %}

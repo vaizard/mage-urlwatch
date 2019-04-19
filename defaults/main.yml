@@ -15,6 +15,9 @@ urlwatch_smtp_pass: ""
 urlwatch_smtp_port: "587"
 urlwatch_smtp_user: ""
 
+urlwatch_cron_hour: "9,14"
+urlwatch_cron_minute: "17"
+
 urlwatch_config:
   display: 
     error: true

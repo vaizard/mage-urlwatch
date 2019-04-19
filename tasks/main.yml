@@ -50,6 +50,6 @@
 - name: Ensure a a cronjob exists. Creates an entry like "0 5 * * /usr/local/bin/urlwatch"
   cron:
     name: "urlwatch"
-    minute: "0"
-    hour: "5"
+    minute: "{{ urlwatch_cron_minute }}"
+    hour: "{{ urlwatch_cron_hour }}"
     job: "/usr/local/bin/urlwatch"
