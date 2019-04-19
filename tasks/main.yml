@@ -2,12 +2,16 @@
 
 - name: "Ensure pip is installed"
   apt:
-    name: python3-pip
     state: latest
+    name: 
+      - python3-pip
+      - python-setuptools
 
 - name: "Ensure urlwatch and dependencies are present & latest"
   pip:
     state: latest
+    executable: pip3
+    virtualenv_python: python3.6
     name:
       - pyyaml 
       - minidb
@@ -17,6 +21,7 @@
       - lxml
       - cssselect
       - urlwatch
+      - keyrings.alt
 
 - name: Ensure Postgres environment variables file created
   template:
@@ -24,4 +29,4 @@
     dest: "{{ urlwatch_config_path }}/{{ item }}"
     mode: 0640
   with_items:
-    - url.yaml
+    - urls.yaml

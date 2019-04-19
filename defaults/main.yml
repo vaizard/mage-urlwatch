@@ -1,4 +1,4 @@
 ---
 
-urlwatch_config_path: ""
-urlwatch_urls: []
+urlwatch_config_path: "/root/.config/urlwatch"
+urlwatch_urls: [] # see urlwatch urls.yaml config
