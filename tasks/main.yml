@@ -1,5 +1,10 @@
 ---
 
+- name: "Ensure pip is installed"
+  apt:
+    name: python3-pip
+    state: latest
+
 - name: "Ensure urlwatch and dependencies are present & latest"
   pip:
     state: latest
@@ -12,3 +17,11 @@
       - lxml
       - cssselect
       - urlwatch
+
+- name: Ensure Postgres environment variables file created
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ urlwatch_config_path }}/{{ item }}"
+    mode: 0640
+  with_items:
+    - urls.yaml
