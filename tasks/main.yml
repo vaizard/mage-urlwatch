@@ -1,0 +1,14 @@
+---
+
+- name: "Ensure urlwatch and dependencies are present & latest"
+  pip:
+    state: latest
+    name:
+      - pyyaml 
+      - minidb
+      - requests
+      - keyring
+      - appdirs
+      - lxml
+      - cssselect
+      - urlwatch
