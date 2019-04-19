@@ -30,3 +30,11 @@
     mode: 0640
   with_items:
     - urls.yaml
+    - urlwatch.yaml
+
+- name: Ensure a a cronjob exists. Creates an entry like "0 5 * * /usr/local/bin/urlwatch"
+  cron:
+    name: "urlwatch"
+    minute: "0"
+    hour: "5"
+    job: "/usr/local/bin/urlwatch"
