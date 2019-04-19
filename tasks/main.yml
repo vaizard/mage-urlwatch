@@ -6,6 +6,7 @@
     name: 
       - python3-pip
       - python-setuptools
+      - expect
 
 - name: "Ensure urlwatch and dependencies are present & latest"
   pip:
@@ -23,14 +24,28 @@
       - urlwatch
       - keyrings.alt
 
-- name: Ensure Postgres environment variables file created
+- name: "Ensure urlwatch is configured"
   template:
     src: "{{ item }}.j2"
     dest: "{{ urlwatch_config_path }}/{{ item }}"
-    mode: 0640
   with_items:
     - urls.yaml
     - urlwatch.yaml
+
+- name: "Ensure python keyring is configured"
+  template:
+    src: "keyringrc.cfg.j2"
+    dest: "/root/.local/share/python_keyring/keyringrc.cfg"
+
+- name: Set/update smtp password into keyring # /root/.local/share/python_keyring/crypted_pass.cfg
+  expect:
+    echo: yes
+    command: "/usr/local/bin/urlwatch --smtp-login"
+    timeout: 5
+    responses:
+      (.*)Enter password for(.*): "{{ urlwatch_smtp_pass }}"
+      (.*)already set(.*) update(.*): "y"
+  when: urlwatch_smtp_pass != ""
 
 - name: Ensure a a cronjob exists. Creates an entry like "0 5 * * /usr/local/bin/urlwatch"
   cron:

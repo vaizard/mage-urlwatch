@@ -1,2 +1,4 @@
 ---
-{{ urlwatch_urls|to_nice_yaml }}
+{% for item in urlwatch_urls %}
+url: "{{ item.url }}"
+{% endfor %}

@@ -1,7 +1,20 @@
 ---
 
 urlwatch_config_path: "/root/.config/urlwatch"
-urlwatch_urls: [] # see urlwatch urls.yaml config
+urlwatch_urls: [] 
+#urlwatch_urls:
+#  - url: 'firsturi'
+#  - url: 'seconduri'
+# also see urlwatch urls.yaml config
+
+urlwatch_email_enabled: true
+urlwatch_email_from: ""
+urlwatch_email_to: ""
+urlwatch_smtp_host: "localhost"
+urlwatch_smtp_pass: ""
+urlwatch_smtp_port: "587"
+urlwatch_smtp_user: ""
+
 urlwatch_config:
   display: 
     error: true
@@ -14,20 +27,20 @@ urlwatch_config:
     url: {}
   report: 
     email: 
-      enabled: false
-      from: ""
+      enabled: "{{ urlwatch_email_enabled }}"
+      from: "{{ urlwatch_email_from }}"
       html: false
       method: smtp
       sendmail: 
         path: sendmail
       smtp: 
-        host: localhost
+        host: "{{ urlwatch_smtp_host }}"
         keyring: true
-        port: 25
+        port: "{{ urlwatch_smtp_port }}"
         starttls: true
-        user: ""
+        user: "{{ urlwatch_smtp_user }}"
       subject: "{count} changes: {jobs}"
-      to: ""
+      to: "{{ urlwatch_email_to }}"
     html: 
       diff: unified
     mailgun: 
